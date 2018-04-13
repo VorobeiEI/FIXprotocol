@@ -5,9 +5,8 @@ import java.util.List;
 
 public class OpsBook {
 
-    private List<Entity> opsbook = new ArrayList<Entity>();
     private List <Bid> bidsList = new ArrayList<>();
-    private List<Offer> offersList = new ArrayList<Offer>();
+    private List<Offer> offersList = new ArrayList<>();
 
     public List<Bid> getBidsList() {
         return bidsList;
@@ -25,13 +24,6 @@ public class OpsBook {
         this.offersList = offersList;
     }
 
-    public List<Entity> getOpsbook() {
-        return opsbook;
-    }
-
-    public void setOpsbook(List<Entity> opsbook) {
-        this.opsbook = opsbook;
-    }
 
     public void add(Entity entity) {
         if(entity.getClass().equals(Bid.class)) {
@@ -41,21 +33,26 @@ public class OpsBook {
         }
     }
 
-    public void addBids(Bid bid) {
-        bidsList.add(bid);
-    }
-
     public void delete (Entity entity) {
         if (entity.getClass().equals(Bid.class)) {
             bidsList.remove(entity);
+        } else {
+            offersList.remove(entity);
         }
     }
 
     public Entity findByID (MDEntryID id) {
-        Entity entity = new Entity();
+        Entity entity = null;
         for (int i = 0; i < bidsList.size(); i++) {
             if (bidsList.get(i).getMdEntryID().equals(id)){
                 entity = bidsList.get(i);
+                break;
+            }
+        }
+
+        for (int i = 0; i < offersList.size(); i++) {
+            if (offersList.get(i).getMdEntryID().equals(id)){
+                entity = offersList.get(i);
                 break;
             }
         }

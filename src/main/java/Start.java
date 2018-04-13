@@ -56,9 +56,9 @@ public class Start extends MessageCracker {
         //System.out.println(message.toXML(dataDictionary));
 
         withStrings.add(test1);
-        //withStrings.add(test2);
+        withStrings.add(test2);
         OpsBook opsBook = new OpsBook();
-        for (int a = 0; a < 1; a++) {
+        for (int a = 0; a < 2; a++) {
             MarketDataIncrementalRefresh.NoMDEntries group = new MarketDataIncrementalRefresh.NoMDEntries();
             Message message = MessageUtils.parse(messageFactory, dataDictionary, (String) withStrings.get(a));
 
@@ -77,6 +77,13 @@ public class Start extends MessageCracker {
                         entity1.setMdEntryPx(group.getMDEntryPx());
                         entity1.setMdEntrySize(group.getMDEntrySize());
                         opsBook.add(entity1);
+                    } else {
+                        Offer offer = new Offer();
+                        offer.setMdEntryType(group.getMDEntryType());
+                        offer.setMdEntryID(group.getMDEntryID());
+                        offer.setMdEntryPx(group.getMDEntryPx());
+                        offer.setMdEntrySize(group.getMDEntrySize());
+                        opsBook.add(offer);
                     }
                 }
             }
@@ -86,6 +93,10 @@ public class Start extends MessageCracker {
                 System.out.println(opsBook.getBidsList().get(i));
             }
             System.out.println();
+
+            for (int i = 0; i < opsBook.getOffersList().size(); i++) {
+                System.out.println(opsBook.getOffersList().get(i));
+            }
         }
 
     }
