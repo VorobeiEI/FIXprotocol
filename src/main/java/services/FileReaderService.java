@@ -1,4 +1,4 @@
-import javafx.fxml.FXML;
+package services;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,14 +9,25 @@ import java.util.List;
 
 public class FileReaderService {
 
-    @FXML
-    private static final String FILENAME = "fix.txt";
+    private String fileName;
 
-    public static List<String> readFromLogFile() {
+    public FileReaderService(String FILENAME) {
+        this.fileName = FILENAME;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public List<String> readFromLogFile() {
         List<String> lines = Collections.emptyList();
 
         try {
-            lines = Files.readAllLines(Paths.get(FILENAME), StandardCharsets.UTF_8);
+            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
             lines.replaceAll(s -> s.toString().substring(s.toString().indexOf("8=FIX.4.4"), s.toString().lastIndexOf(" ")));
         } catch (IOException e) {
             e.printStackTrace();

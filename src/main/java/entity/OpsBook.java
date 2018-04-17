@@ -1,3 +1,8 @@
+package entity;
+
+import entity.Bid;
+import entity.Entity;
+import entity.Offer;
 import quickfix.field.MDEntryID;
 
 import java.util.ArrayList;

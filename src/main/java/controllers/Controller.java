@@ -1,10 +1,15 @@
-import quickfix.*;
+package controllers;
 
+import entity.Bid;
+import entity.Offer;
+import entity.OpsBook;
+import quickfix.*;
 import quickfix.field.MsgType;
 import quickfix.fix44.MarketDataIncrementalRefresh;
+import services.FileReaderService;
+import services.FileWriterService;
 
 import java.util.List;
-
 
 public class Controller {
 
@@ -16,7 +21,7 @@ public class Controller {
     private OpsBook opsBook;
     private List withStrings;
 
-    public Controller() {
+    public Controller(FileReaderService fileReaderService, FileWriterService fileWriterService) {
         try {
             this.dataDictionary = new DataDictionary(dataDictionaryFile);
         } catch (ConfigError configError) {
@@ -24,11 +29,11 @@ public class Controller {
         }
         this.messageFactory = new DefaultMessageFactory();
         this.opsBook = new OpsBook();
-        this.fileWriterService = new FileWriterService();
-        this.withStrings = FileReaderService.readFromLogFile();
+        this.fileWriterService = fileWriterService;
+        this.withStrings = fileReaderService.readFromLogFile();
     }
 
-    public void start() throws InvalidMessage, FieldNotFound {
+    public void startManagedBook() throws InvalidMessage, FieldNotFound {
 
         for (int a = 0; a < withStrings.size(); a++) {
             Message message = MessageUtils.parse(messageFactory, dataDictionary, (String) withStrings.get(a));

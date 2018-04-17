@@ -1,12 +1,14 @@
+package entity;
+
 import quickfix.field.*;
 
 public class Entity {
 
-     MDUpdateAction mdUpdateAction ;
-     MDEntryType mdEntryType;
-     MDEntryID mdEntryID;
-     MDEntryPx mdEntryPx;
-     MDEntrySize mdEntrySize;
+    MDUpdateAction mdUpdateAction;
+    MDEntryType mdEntryType;
+    MDEntryID mdEntryID;
+    MDEntryPx mdEntryPx;
+    MDEntrySize mdEntrySize;
 
     public MDEntryPx getMdEntryPx() {
         return mdEntryPx;

@@ -6,17 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Window">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FXinitializer">
    <children>
       <AnchorPane layoutX="6.0" layoutY="5.0" prefHeight="378.0" prefWidth="587.0">
          <children>
-            <Button layoutX="362.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Start" />
-            <Button layoutX="481.0" layoutY="305.0" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="start" layoutX="362.0" layoutY="305.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Start" />
+            <Button fx:id="cancel" layoutX="481.0" layoutY="305.0" mnemonicParsing="false" text="Cancel" />
             <Label layoutX="40.0" layoutY="57.0" text="FIX Log File" />
             <Label layoutX="40.0" layoutY="131.0" text="Report File" />
-            <TextField fx:id="FILENAME" layoutX="237.0" layoutY="52.0" prefHeight="25.0" prefWidth="200.0" promptText="LOGFILENAME" />
-            <TextField layoutX="237.0" layoutY="126.0" prefHeight="25.0" prefWidth="200.0" promptText="Fill path to create report" />
+            <TextField fx:id="filename" layoutX="237.0" layoutY="52.0" prefHeight="25.0" prefWidth="200.0" promptText="LOGFILENAME" text="fix.txt" />
+            <TextField fx:id="reportFile" layoutX="237.0" layoutY="126.0" prefHeight="25.0" prefWidth="200.0" promptText="Fill path to create report" text="default.txt" />
+            <Button fx:id="browseLogFile" layoutX="474.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Browse" />
+            <Button fx:id="browseReportFile" layoutX="474.0" layoutY="126.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Browse" />
          </children>
       </AnchorPane>
    </children>

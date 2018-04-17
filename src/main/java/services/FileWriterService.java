@@ -1,16 +1,24 @@
+package services;
+
+import entity.Bid;
+import entity.Offer;
+import entity.OpsBook;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 
 public class FileWriterService {
-    private File file = new File("opsBook.txt");
+    private File file;
     private FileWriter fileWriter;
 
-    public FileWriterService() {
+    public FileWriterService(String pathToFile) {
+        file = new File(pathToFile);
         if (file.exists()) {
             file.delete();
         }
+
     }
 
     public void writeToFile(OpsBook opsBook) {
