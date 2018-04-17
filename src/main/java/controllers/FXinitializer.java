@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -45,6 +46,7 @@ public class FXinitializer {
         cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.exit(0));
 
         start.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
             if (filename.getText() == null || reportFile.getText() == null) {
                 fileReaderService = new FileReaderService("fix.txt");
 
@@ -71,7 +73,13 @@ public class FXinitializer {
             File selectedDirectory =
                     fileChooser.showOpenDialog(primaryStage);
             if (selectedDirectory == null) {
-                filename.setText("fix.txt");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setHeaderText("Look, a Warning Dialog");
+                alert.setContentText("Careful with the next step!");
+
+                alert.showAndWait();
+                //filename.setText("fix.txt");
             } else {
                 filename.setText(selectedDirectory.getAbsolutePath());
             }
