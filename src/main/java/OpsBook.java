@@ -5,8 +5,17 @@ import java.util.List;
 
 public class OpsBook {
 
-    private List <Bid> bidsList = new ArrayList<>();
+    private List<Bid> bidsList = new ArrayList<>();
     private List<Offer> offersList = new ArrayList<>();
+    private List<String> deletedOps = new ArrayList<>();
+
+    public List<String> getDeletedOps() {
+        return deletedOps;
+    }
+
+    public void setDeletedOps(List<String> deletedOps) {
+        this.deletedOps = deletedOps;
+    }
 
     public List<Bid> getBidsList() {
         return bidsList;
@@ -26,32 +35,34 @@ public class OpsBook {
 
 
     public void add(Entity entity) {
-        if(entity.getClass().equals(Bid.class)) {
-            bidsList.add((Bid)entity);
+        if (entity.getClass().equals(Bid.class)) {
+            bidsList.add((Bid) entity);
         } else {
-            offersList.add((Offer)entity);
+            offersList.add((Offer) entity);
         }
     }
 
-    public void delete (Entity entity) {
+    public void delete(Entity entity) {
         if (entity.getClass().equals(Bid.class)) {
             bidsList.remove(entity);
+            deletedOps.add(entity.getMdEntryID().getValue());
         } else {
             offersList.remove(entity);
+            deletedOps.add(entity.getMdEntryID().getValue());
         }
     }
 
-    public Entity findByID (MDEntryID id) {
+    public Entity findByID(MDEntryID id) {
         Entity entity = null;
         for (int i = 0; i < bidsList.size(); i++) {
-            if (bidsList.get(i).getMdEntryID().equals(id)){
+            if (bidsList.get(i).getMdEntryID().equals(id)) {
                 entity = bidsList.get(i);
                 break;
             }
         }
 
         for (int i = 0; i < offersList.size(); i++) {
-            if (offersList.get(i).getMdEntryID().equals(id)){
+            if (offersList.get(i).getMdEntryID().equals(id)) {
                 entity = offersList.get(i);
                 break;
             }
