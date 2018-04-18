@@ -14,8 +14,8 @@
             <Button fx:id="cancel" layoutX="481.0" layoutY="305.0" mnemonicParsing="false" text="Cancel" />
             <Label layoutX="40.0" layoutY="57.0" text="FIX Log File" />
             <Label layoutX="40.0" layoutY="131.0" text="Report File" />
-            <TextField fx:id="filename" layoutX="237.0" layoutY="52.0" prefHeight="25.0" prefWidth="200.0" promptText="LOGFILENAME" text="fix.txt" />
-            <TextField fx:id="reportFile" layoutX="237.0" layoutY="126.0" prefHeight="25.0" prefWidth="200.0" promptText="Fill path to create report" text="default.txt" />
+            <TextField fx:id="filename" layoutX="237.0" layoutY="52.0" prefHeight="25.0" prefWidth="200.0" promptText="Log File" />
+            <TextField fx:id="reportFile" layoutX="237.0" layoutY="126.0" prefHeight="25.0" prefWidth="200.0" promptText="File to create report" />
             <Button fx:id="browseLogFile" layoutX="474.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Browse" />
             <Button fx:id="browseReportFile" layoutX="474.0" layoutY="126.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Browse" />
          </children>

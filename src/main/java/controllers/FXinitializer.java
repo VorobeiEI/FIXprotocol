@@ -47,34 +47,31 @@ public class FXinitializer {
         cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.exit(0));
 
         start.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setContentText("Если Вы не выбрали файлы для чтения и сохранения данных, они будут выбраны по умолчанию");
-            alert.setResizable(true);
-            alert.showAndWait();
-            if (filename.getText() == null || reportFile.getText() == null) {
-                fileReaderService = new FileReaderService("fix.txt");
-
-                fileWriterService = new FileWriterService("default.txt");
+            if (filename.getText().isEmpty() || reportFile.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Вы не выбрали файлы для сохранения и чттения, пожалуйста выбирете файлы");
+                alert.setResizable(true);
+                alert.showAndWait();
             } else {
                 fileReaderService = new FileReaderService(filename.getText());
 
                 fileWriterService = new FileWriterService(reportFile.getText());
+                controller = new Controller(fileReaderService, fileWriterService);
+                try {
+                    controller.startManagedBook();
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setContentText("Менеджмент книги завершен");
+                    alert.setResizable(true);
+                    alert.showAndWait();
+                } catch (InvalidMessage invalidMessage) {
+                    invalidMessage.printStackTrace();
+                } catch (FieldNotFound fieldNotFound) {
+                    fieldNotFound.printStackTrace();
+                }
             }
 
-            controller = new Controller(fileReaderService, fileWriterService);
-            try {
-                controller.startManagedBook();
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setContentText("Менеджмент книги завершен");
-                alert.setResizable(true);
-                alert.showAndWait();
-            } catch (InvalidMessage invalidMessage) {
-                invalidMessage.printStackTrace();
-            } catch (FieldNotFound fieldNotFound) {
-                fieldNotFound.printStackTrace();
-            }
         });
 
         browseLogFile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -85,10 +82,9 @@ public class FXinitializer {
             if (selectedDirectory == null) {
                 alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Вы не выбрали файл с логами, будет выбран файл по умолчанию fix.txt");
+                alert.setContentText("Выбирите пожалуйста файл с логами");
                 alert.setResizable(true);
                 alert.showAndWait();
-                filename.setText("fix.txt");
             } else {
                 filename.setText(selectedDirectory.getAbsolutePath());
             }
@@ -102,10 +98,9 @@ public class FXinitializer {
             if (selectedDirectory == null) {
                 alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Вы не выбрали файл с для сохранения книги, книга будет сохранена в default.txt");
+                alert.setContentText("Выбирите пожалуйста файл для сохранения менеджмента книжки");
                 alert.setResizable(true);
                 alert.showAndWait();
-                reportFile.setText("default.txt");
             } else {
                 reportFile.setText(selectedDirectory.getAbsolutePath());
             }
