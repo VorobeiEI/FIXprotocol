@@ -1,6 +1,5 @@
 package controllers;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,6 +23,8 @@ public class FXinitializer {
 
     private Stage primaryStage;
 
+    private Alert alert;
+
     @FXML
     public TextField filename;
     @FXML
@@ -46,7 +47,11 @@ public class FXinitializer {
         cancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.exit(0));
 
         start.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setContentText("Если Вы не выбрали файлы для чтения и сохранения данных, они будут выбраны по умолчанию");
+            alert.setResizable(true);
+            alert.showAndWait();
             if (filename.getText() == null || reportFile.getText() == null) {
                 fileReaderService = new FileReaderService("fix.txt");
 
@@ -60,6 +65,11 @@ public class FXinitializer {
             controller = new Controller(fileReaderService, fileWriterService);
             try {
                 controller.startManagedBook();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                alert.setContentText("Менеджмент книги завершен");
+                alert.setResizable(true);
+                alert.showAndWait();
             } catch (InvalidMessage invalidMessage) {
                 invalidMessage.printStackTrace();
             } catch (FieldNotFound fieldNotFound) {
@@ -73,13 +83,12 @@ public class FXinitializer {
             File selectedDirectory =
                     fileChooser.showOpenDialog(primaryStage);
             if (selectedDirectory == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setHeaderText("Look, a Warning Dialog");
-                alert.setContentText("Careful with the next step!");
-
+                alert.setContentText("Вы не выбрали файл с логами, будет выбран файл по умолчанию fix.txt");
+                alert.setResizable(true);
                 alert.showAndWait();
-                //filename.setText("fix.txt");
+                filename.setText("fix.txt");
             } else {
                 filename.setText(selectedDirectory.getAbsolutePath());
             }
@@ -91,6 +100,11 @@ public class FXinitializer {
             File selectedDirectory =
                     fileChooser.showOpenDialog(primaryStage);
             if (selectedDirectory == null) {
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Вы не выбрали файл с для сохранения книги, книга будет сохранена в default.txt");
+                alert.setResizable(true);
+                alert.showAndWait();
                 reportFile.setText("default.txt");
             } else {
                 reportFile.setText(selectedDirectory.getAbsolutePath());
