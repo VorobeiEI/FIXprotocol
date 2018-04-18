@@ -50,7 +50,7 @@ public class FXinitializer {
             if (filename.getText().isEmpty() || reportFile.getText().isEmpty()) {
                 alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Вы не выбрали файлы для сохранения и чттения, пожалуйста выбирете файлы");
+                alert.setContentText("Вы не выбрали файлы для сохранения и чттения, пожалуйста выберите файлы");
                 alert.setResizable(true);
                 alert.showAndWait();
             } else {
@@ -82,7 +82,7 @@ public class FXinitializer {
             if (selectedDirectory == null) {
                 alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Выбирите пожалуйста файл с логами");
+                alert.setContentText("Выберите пожалуйста файл с логами");
                 alert.setResizable(true);
                 alert.showAndWait();
             } else {
@@ -98,7 +98,7 @@ public class FXinitializer {
             if (selectedDirectory == null) {
                 alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Выбирите пожалуйста файл для сохранения менеджмента книжки");
+                alert.setContentText("Выберите пожалуйста файл для сохранения менеджмента книжки");
                 alert.setResizable(true);
                 alert.showAndWait();
             } else {
